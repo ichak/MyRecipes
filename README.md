@@ -6,4 +6,4 @@ MyRecipes est un site de recette de cuisine avec plus de 60.000 recettes
 Kelim Boumali,</br>
 Lyse Partigianoni,</br>
 Kamel Derkaoui,</br>
-Ishak Chennouf,</br>
+Ishak Chennouf</br>
