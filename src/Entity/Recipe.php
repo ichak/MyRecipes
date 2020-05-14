@@ -55,7 +55,7 @@ class Recipe
     /**
      * @var ?User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="recipes")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $user;
