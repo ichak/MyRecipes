@@ -35,7 +35,7 @@ class Recipe
     private $time;
 
     /**
-     * @ORM\OneToMany(targetEntity=RecipeIngredient::class, mappedBy="Rescipe", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=RecipeIngredient::class, mappedBy="Recipe", orphanRemoval=true)
      */
     private $recipeIngredients;
 
@@ -43,6 +43,14 @@ class Recipe
      * @ORM\ManyToMany(targetEntity=Meal::class, inversedBy="recipes")
      */
     private $meals;
+
+    /**
+     * @var ?Image
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade="all", orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $image;
 
     public function __construct()
     {
@@ -144,6 +152,33 @@ class Recipe
         if ($this->meals->contains($meal)) {
             $this->meals->removeElement($meal);
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of image.
+     *
+     * @return ?Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set the value of image.
+     *
+     * @param ?Image $image
+     *
+     * @return self
+     */
+    public function setImage(?Image $image)
+    {
+        if (empty($image->getFile())) {
+            $image = null;
+        }
+        $this->image = $image;
 
         return $this;
     }
