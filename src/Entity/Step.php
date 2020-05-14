@@ -27,6 +27,12 @@ class Step
      */
     private $Step;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Recipe::class, inversedBy="step")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $recipe;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +58,18 @@ class Step
     public function setStep(string $Step): self
     {
         $this->Step = $Step;
+
+        return $this;
+    }
+
+    public function getRecipe(): ?Recipe
+    {
+        return $this->recipe;
+    }
+
+    public function setRecipe(?Recipe $recipe): self
+    {
+        $this->recipe = $recipe;
 
         return $this;
     }
