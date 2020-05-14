@@ -60,6 +60,11 @@ class Recipe
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="Recipe", orphanRemoval=true)
+     */
+    private $step;
+
     public function __construct()
     {
         $this->recipeIngredients = new ArrayCollection();
@@ -207,6 +212,37 @@ class Recipe
     public function setUser(?User $user)
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Step[]
+     */
+    public function getStep(): Collection
+    {
+        return $this->step;
+    }
+
+    public function addStep(Step $step): self
+    {
+        if (!$this->steps->contains($step)) {
+            $this->steps[] = $step;
+            $step->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStep(Step $step): self
+    {
+        if ($this->steps->contains($step)) {
+            $this->steps->removeElement($step);
+            // set the owning side to null (unless already changed)
+            if ($step->getRecipe() === $this) {
+                $step->setRecipe(null);
+            }
+        }
 
         return $this;
     }
