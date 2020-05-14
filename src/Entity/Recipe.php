@@ -52,6 +52,14 @@ class Recipe
      */
     private $image;
 
+    /**
+     * @var ?User
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->recipeIngredients = new ArrayCollection();
@@ -179,6 +187,26 @@ class Recipe
             $image = null;
         }
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return ?User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param ?User $user
+     *
+     * @return self
+     */
+    public function setUser(?User $user)
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -33,6 +34,19 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user")
+     */
+    private $recipes;
+
+    public function __construct()
+    {
+        // crée un nouvel objet ArrayCollection par défaut pour éviter les erreurs d'appel de méthode sur une valeur nulle
+        $this->recipe = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -110,5 +124,30 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getRecipes()
+    {
+        return $this->recipes;
+    }
+
+    /**
+     * @param ArrayCollection $recipes
+     *
+     * @return self
+     */
+    public function setRecipes(ArrayCollection $recipes)
+    {
+        $this->recipes = $recipes;
+
+        return $this;
     }
 }
