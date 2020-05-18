@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Meal index{% endblock %}
+
+{% block body %}
+    <h1>Meal index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for meal in meals %}
+            <tr>
+                <td>{{ meal.id }}</td>
+                <td>{{ meal.name }}</td>
+                <td>
+                    <a href="{{ path('meal_show', {'id': meal.id}) }}">show</a>
+                    <a href="{{ path('meal_edit', {'id': meal.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('meal_new') }}">Create new</a>
+{% endblock %}

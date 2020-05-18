@@ -1,0 +1,7 @@
+recette:
+  title: Nom de la recette
+  delete_image: Supprimer l'image
+  time: Temps
+  steps: Étapes
+  meals: Catégories
+  ingredients: Ingrédients
