@@ -1,0 +1,7 @@
+recipe:
+  result_count: >-
+    {count, plural,
+      =0 {Aucune recette trouvée}
+      one {Une seule recette trouvée} 
+      other {# recettes trouvées}
+    }
