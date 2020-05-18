@@ -1,7 +1,6 @@
-body {
-    background-color: lightgray;
-}
+@import 'common.scss';
 
-.className {
-    color: red;
+
+body {
+    margin-top: 55px;
 }
