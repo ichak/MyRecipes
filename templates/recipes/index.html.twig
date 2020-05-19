@@ -10,8 +10,9 @@
 
     This friendly message is coming from:
     <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/33625/Desktop/MyRecipes/src/Controller/RecipesController.php'|file_link(0) }}">src/Controller/RecipesController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/33625/Desktop/MyRecipes/templates/recipes/index.html.twig'|file_link(0) }}">templates/recipes/index.html.twig</a></code></li>
+        {% for recipe in recipes %}
+            <li>{{recipe.name}}</li>
+        {% endfor %}
     </ul>
 </div>
 
