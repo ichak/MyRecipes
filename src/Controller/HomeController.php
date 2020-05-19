@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Recipe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -10,10 +11,10 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="accueil")
      */
-    public function index()
+    public function index(Recipe $recipe)
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+        return $this->render('recipes/index.html.twig', [
+            'recipe' => $recipe
         ]);
     }
 }
