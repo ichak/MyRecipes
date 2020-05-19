@@ -15,10 +15,20 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
-    /**
-     * Recherche des recettes
-     */
-    public function findBySearch(string $search, int $page = 1, int $countPerPage = 30): Paginator
+    public function findOneBySomeField($value)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.name = :val')
+            ->setParameter(':val', $value)
+            ->getQuery()
+        ;
+    }
+
+    // /**
+    //  * @return Recipe[] Returns an array of Recipe objects
+    //  */
+    /*
+    public function findByExampleField($value)
     {
         $firstResult = ($page - 1) * $countPerPage;
         $query = $this->createQueryBuilder('r')
