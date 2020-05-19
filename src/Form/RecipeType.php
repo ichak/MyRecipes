@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -44,16 +45,15 @@ class RecipeType extends AbstractType
                 'attr' => ['class' => 'wysiwyg'],
             ])
 
-            ->add('meals', EntityType::class, [
-                'label' => 'recipe.meals',
-                'class' => Meal::class,
-                'multiple' => true,
+            ->add('meals', ChoiceType::class, [
+                'label' => 'recipe.meal',
+                'help' => 'recipe.meal_help',
                 'expanded' => true,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->orderBy('c.name', 'asc')
-                    ;
-                },
+                'choices' => [
+                    'recipe.breakfast' => 0,
+                    'recipe.lunch' => 1,
+                    'recipe.diner' => 2,
+                ],
             ])
 
             ->add('save', SubmitType::class, ['label' => 'save'])
