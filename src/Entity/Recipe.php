@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RecipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,14 +21,30 @@ class Recipe
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(type="string", length=160)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 160,
+     *      minMessage = "Le nom doit être plus grand que {{ limit }} caractères",
+     *      maxMessage = "Le nom doit être plus petit que {{ limit }} caractères",
+     *      allowEmptyString = false
+     * )
      */
     private $name;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime")
      */
-    private $date;
+    private $dateCreate;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateUpdate;
 
     /**
      * @ORM\Column(type="integer")
@@ -50,7 +67,12 @@ class Recipe
      * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade="all", orphanRemoval=true)
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
-    private $image;
+    private $image = null;
+
+    /**
+     * @var bool
+     */
+    private $deleteImage;
 
     /**
      * @var ?User
@@ -88,16 +110,48 @@ class Recipe
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    /**
+     * Get the value of dateCreate.
+     *
+     * @return \DateTime
+     */
+    public function getDateCreate()
     {
-        return $this->date;
+        return $this->dateCreate;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    /**
+     * Set the value of dateCreate.
+     *
+     * @param \DateTime $dateCreate
+     *
+     * @return self
+     */
+    public function setDateCreate(\DateTime $dateCreate)
     {
-        $this->date = $date;
+        $this->dateCreate = $dateCreate;
 
         return $this;
+    }
+
+    public function getDateUpdate(): ?\DateTimeInterface
+    {
+        return $this->dateUpdate;
+    }
+
+    public function setDateUpdate(?\DateTimeInterface $dateUpdate): self
+    {
+        $this->dateUpdate = $dateUpdate;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        $this->dateUpdate = new \DateTime();
     }
 
     public function getTime(): ?int
@@ -108,6 +162,24 @@ class Recipe
     public function setTime(int $time): self
     {
         $this->time = $time;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDeleteImage()
+    {
+        return $this->deleteImage;
+    }
+
+    public function setDeleteImage(bool $deleteImage)
+    {
+        $this->deleteImage = $deleteImage;
+        if ($deleteImage) {
+            $this->image = null;
+        }
 
         return $this;
     }
