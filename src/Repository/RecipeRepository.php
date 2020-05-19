@@ -32,11 +32,11 @@ class RecipeRepository extends ServiceEntityRepository
     {
         $firstResult = ($page - 1) * $countPerPage;
         $query = $this->createQueryBuilder('r')
-            ->addSelect('img, i, c, u, s')
+            ->addSelect('img, ri, m, u, s')
             ->leftJoin('r.image', 'img')
-            ->leftJoin('r.ingredients', 'i')
+            ->leftJoin('r.recipeIngredients', 'ri')
             ->leftJoin('r.meals', 'm')
-            ->leftJoin('r.steps', 's')
+            ->leftJoin('r.step', 's')
             ->leftJoin('r.user', 'u')
             ->where('r.content LIKE :search')
             ->setParameter(':search', '%'.trim($search).'%')
@@ -56,11 +56,11 @@ class RecipeRepository extends ServiceEntityRepository
         $firstResult = ($page - 1) * $countPerPage;
 
         $query = $this->createQueryBuilder('r')
-            ->addSelect('img, i, c, u, s')
+            ->addSelect('img, ri, m, u, s')
             ->leftJoin('r.image', 'img')
-            ->leftJoin('r.ingredients', 'i')
+            ->leftJoin('r.recipeIngredients', 'ri')
             ->leftJoin('r.meals', 'm')
-            ->leftJoin('r.steps', 's')
+            ->leftJoin('r.step', 's')
             ->leftJoin('r.user', 'u')
             ->orderBy('r.dateCreate', 'desc')
             ->setFirstResult($firstResult)
