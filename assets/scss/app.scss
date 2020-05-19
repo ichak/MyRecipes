@@ -1,6 +1,8 @@
 @import 'common.scss';
 
-
-body {
-    margin-top: 55px;
-}
+@import 'homePage.scss';
+@import 'directions.scss';
+@import 'recipes.scss';
+@import 'log.scss';
+@import 'accountSettings.scss';
+@import 'navbar.scss'; 

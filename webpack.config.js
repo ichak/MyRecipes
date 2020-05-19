@@ -24,9 +24,12 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-    .addEntry('admin', './assets/js/admin.js')
-    //.addEntry('page1', './assets/js/page1.js')
-    //.addEntry('page2', './assets/js/page2.js')
+    .addEntry('homePage', './assets/js/homePage.js')
+    .addEntry('recipes', './assets/js/recipes.js')
+    .addEntry('accountSettings', './assets/js/accountSettings.js')
+    .addEntry('log', './assets/js/log.js')
+    .addEntry('directions', './assets/js/directions.js')
+    .addEntry('navbar', './assets/js/navbar.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
