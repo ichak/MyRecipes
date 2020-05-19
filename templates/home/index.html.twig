@@ -4,17 +4,17 @@
 
 {% block body %}
 
-<div class="container">
-    <h1>Recherchez votre recette</h1>
-</div>
-
-<form>
-    <div class ="container">
-        <div class="form-group">
-            <input type="search" class="form-control" id="searchBar" placeholder="Recherchez votre recette préferée">
+<div class="page-home">
+    
+        <div class="row justify-content-md-center">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="search" class="form-control" id="searchBar" placeholder="Que voulez vous manger ?">
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                </div>
+            </form>
         </div>
-        <button type="submit" class="btn btn-primary">Rechercher</button>
-    </div>
-</form>
+    
+</div>
 
 {% endblock %}
