@@ -14,6 +14,13 @@ class Spoonacular
         return $this->getResponse($url);
     }
 
+    public function searchById(string $query)
+    {
+        $url = 'recipes/{id}/information'.trim($query);
+
+        return $this->getResponse($url);
+    }
+
     public function searchByIngredients(string $query)
     {
         $url = 'recipes/findByIngredients?ingredients='.trim($query);
