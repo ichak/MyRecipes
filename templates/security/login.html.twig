@@ -15,7 +15,7 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Inscrivez vous</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Connectez vous</h1>
     <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
     <label for="inputPassword">Mot de passe</label>
@@ -37,25 +37,10 @@
     #}
 
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        Connexion
     </button>
 </form>
 
-<?php
 
- // Vérifier si le formulaire est soumis 
-    if ( isset( $_POST['submit'] ) )
-    {
-    /* récupérer les données du formulaire en utilisant 
-        la valeur des attributs name comme clé 
-    */
-    $email = $_POST['email']; 
-    $password = $_POST['password'];
-    // afficher le résultat
-    echo '<h3>Informations récupérées en utilisant POST</h3>'; 
-    echo 'Email : ' . $email . ' Adresse : ' . $password; 
-    exit;
-    }
-?>
 
 {% endblock %}
