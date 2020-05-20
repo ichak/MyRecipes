@@ -4,6 +4,7 @@
 
 {% block body %}
 <form method="post">
+
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -14,10 +15,10 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Inscrivez vous</h1>
     <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
+    <label for="inputPassword">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" required>
 
     <input type="hidden" name="_csrf_token"
@@ -39,4 +40,22 @@
         Sign in
     </button>
 </form>
+
+<?php
+
+ // Vérifier si le formulaire est soumis 
+    if ( isset( $_POST['submit'] ) )
+    {
+    /* récupérer les données du formulaire en utilisant 
+        la valeur des attributs name comme clé 
+    */
+    $email = $_POST['email']; 
+    $password = $_POST['password'];
+    // afficher le résultat
+    echo '<h3>Informations récupérées en utilisant POST</h3>'; 
+    echo 'Email : ' . $email . ' Adresse : ' . $password; 
+    exit;
+    }
+?>
+
 {% endblock %}
