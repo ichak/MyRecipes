@@ -36,7 +36,7 @@ class RecipeController extends AbstractController
 
         $nbPages = ceil($recipes->count() / $countPerPage);
 
-        return $this->render('article/index.html.twig', ['recipes' => $recipes, 'page' => $page, 'nbPages' => $nbPages]);
+        return $this->render('recipe/index.html.twig', ['recipes' => $recipes, 'page' => $page, 'nbPages' => $nbPages]);
     }
 
     /**
@@ -64,7 +64,7 @@ class RecipeController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($recipe);
             $entityManager->flush();
-            $this->addFlash('success', $translator->trans('article.new.success', ['%title%' => $recipe->getName()]));
+            $this->addFlash('success', $translator->trans('recipe.new.success', ['%title%' => $recipe->getName()]));
 
             return $this->redirectToRoute('recipe_index');
         }
@@ -115,9 +115,9 @@ class RecipeController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Recette supprimée');
 
-            return $this->redirectToRoute('app_article_index');
+            return $this->redirectToRoute('app_recipe_index');
         }
-        return $this->render('article/delete.html.twig', [
+        return $this->render('recipe/delete.html.twig', [
             'article' => $recipe,
             'form' => $form->createView(), ]
         );

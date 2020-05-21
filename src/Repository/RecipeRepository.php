@@ -15,20 +15,10 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
-    public function findOneBySomeField($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->where('a.name = :val')
-            ->setParameter(':val', $value)
-            ->getQuery()
-        ;
-    }
-
     /**
-     * @return Recipe[] Returns an array of Recipe objects
+     * Recherche des recettes
      */
-    // /*
-    public function findByExampleField($value)
+    public function findBySearch(string $search, int $page = 1, int $countPerPage = 30): Paginator
     {
         $firstResult = ($page - 1) * $countPerPage;
         $query = $this->createQueryBuilder('r')
@@ -36,7 +26,7 @@ class RecipeRepository extends ServiceEntityRepository
             ->leftJoin('r.image', 'img')
             ->leftJoin('r.recipeIngredients', 'ri')
             ->leftJoin('r.meals', 'm')
-            ->leftJoin('r.step', 's')
+            ->leftJoin('r.steps', 's')
             ->leftJoin('r.user', 'u')
             ->where('r.content LIKE :search')
             ->setParameter(':search', '%'.trim($search).'%')
@@ -60,7 +50,7 @@ class RecipeRepository extends ServiceEntityRepository
             ->leftJoin('r.image', 'img')
             ->leftJoin('r.recipeIngredients', 'ri')
             ->leftJoin('r.meals', 'm')
-            ->leftJoin('r.step', 's')
+            ->leftJoin('r.steps', 's')
             ->leftJoin('r.user', 'u')
             ->orderBy('r.dateCreate', 'desc')
             ->setFirstResult($firstResult)
