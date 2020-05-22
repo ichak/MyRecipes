@@ -41,7 +41,7 @@ class RecipeController extends AbstractController
 
     /**
      * @Route("/{id}", requirements = {"id": "\d+"})
-     * @Security("is_granted('view', article)")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function show(Recipe $recipe)
     {
@@ -51,7 +51,7 @@ class RecipeController extends AbstractController
 
     /**
      * @Route("/new", name="recipe_new", methods={"GET","POST"})
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function new(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
@@ -66,7 +66,7 @@ class RecipeController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', $translator->trans('recipe.new.success', ['%title%' => $recipe->getName()]));
 
-            return $this->redirectToRoute('recipe_index');
+            return $this->redirectToRoute('app_recipe_index');
         }
 
         return $this->render('recipe/new.html.twig', [
@@ -77,7 +77,7 @@ class RecipeController extends AbstractController
 
     /**
      * @Route("/{id}/edit", requirements = {"id": "\d+"})
-     * @Security("is_granted('edit', recipe)")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator, Recipe $recipe): Response
     {
@@ -115,10 +115,10 @@ class RecipeController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Recette supprimée');
 
-            return $this->redirectToRoute('app_recipe_index');
+            return $this->redirectToRoute('accueil');
         }
-        return $this->render('recipe/delete.html.twig', [
-            'article' => $recipe,
+        return $this->render('recipe/_delete_form.html.twig', [
+            'recipe' => $recipe,
             'form' => $form->createView(), ]
         );
     }
