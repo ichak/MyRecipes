@@ -117,7 +117,7 @@ class RecipeController extends AbstractController
 
             return $this->redirectToRoute('accueil');
         }
-        return $this->render('recipe/delete.html.twig', [
+        return $this->render('recipe/_delete_form.html.twig', [
             'recipe' => $recipe,
             'form' => $form->createView(), ]
         );
