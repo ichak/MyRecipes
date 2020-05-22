@@ -22,10 +22,6 @@
                 <td>{{ recipe.name }}</td>
                 <td>{{ recipe.dateCreate ? recipe.dateCreate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ recipe.time }}</td>
-                <td>
-                    <a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">show</a>
-                    <a href="{{ path('app_recipe_edit', {'id': recipe.id}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>
@@ -35,5 +31,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('recipe_new') }}">Create new</a>
 {% endblock %}
