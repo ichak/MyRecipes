@@ -50,7 +50,7 @@ class RecipeRepository extends ServiceEntityRepository
             ->leftJoin('r.image', 'img')
             ->leftJoin('r.recipeIngredients', 'ri')
             ->leftJoin('r.meals', 'm')
-            ->leftJoin('r.steps', 's')
+            ->leftJoin('r.step', 's')
             ->leftJoin('r.user', 'u')
             ->orderBy('r.dateCreate', 'desc')
             ->setFirstResult($firstResult)
