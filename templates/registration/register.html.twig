@@ -5,11 +5,16 @@
 {% block body %}
     <h1>Inscrivez vous !</h1>
 
-    {{ form_start(registrationForm) }}
+    <div class="container">
+        
+    
+    {{form_start(registrationForm)}}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    </div>
+
 {% endblock %}
