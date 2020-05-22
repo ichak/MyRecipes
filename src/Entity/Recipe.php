@@ -91,6 +91,7 @@ class Recipe
     {
         $this->recipeIngredients = new ArrayCollection();
         $this->meals = new ArrayCollection();
+        $this->step = new ArrayCollection();
     }
 
     public function getId(): ?int

@@ -20,10 +20,13 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
+            form_login:
+                login_path: app_login
+                check_path: app_login
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: app_home
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 2592000 # 30 jours, c'est optionnel, par defaut c'est 1 an
