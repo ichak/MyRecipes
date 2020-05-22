@@ -1,5 +1,6 @@
 
 .page-home {
+    font-family: 'Raleway', sans-serif;
     .row {
         background-color: #FCF068;
         height : 200px;
@@ -8,8 +9,21 @@
     }
     form.form-inline{
         min-width: 500px;
+        margin-top: 10%;
     }
-    #searchBar.form-control{
-        min-width: 300px;
+    .form-control#searchBar{
+        width: 350px;
+    }
+    img{
+        margin-top: 10px;
+        margin-left: 80px;
+    }
+};
+.page-home2{
+    font-family: 'Raleway', sans-serif;
+    .container{
+        margin-top: 10%;
+        text-align: center;
+        color: #FA6E59;
     }
 };

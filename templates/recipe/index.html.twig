@@ -3,8 +3,18 @@
 {% block title %}Recipe index{% endblock %}
 
 {% block body %}
-    <h1>Recipe index</h1>
-
+    <div class="page-recipes">
+    
+        <div class="row">
+            <div class="col-4">
+                <img src="https://cdn.pixabay.com/photo/2016/10/10/01/58/donut-1727498_960_720.png" alt="cake" width="280" height="288"></img>
+            </div>
+            <div class="col-8">
+               <h1>Mes recettes préférées</h1>
+            </div>
+        </div>
+</div>
+<div class="page-recipes2">
     <table class="table">
         <thead>
             <tr>
@@ -12,10 +22,11 @@
                 <th>Name</th>
                 <th>Date</th>
                 <th>Time</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
+        
         {% for recipe in recipes %}
             <tr>
                 <td>{{ recipe.id }}</td>
@@ -25,10 +36,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Oups c'est bien vide ici...</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+</div>
 
 {% endblock %}
