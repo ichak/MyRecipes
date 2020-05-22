@@ -6,6 +6,7 @@ use App\Entity\Recipe;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,9 +38,18 @@ class RecipeType extends AbstractType
                 'attr' => ['placeholder' => 'recipe.ingredients'],
             ])
 
-            ->add('step', null, [
+            ->add('step', CollectionType::class, [
+
                 'label' => 'recipe.steps',
-                'attr' => ['class' => 'wysiwyg'],
+                'entry_type' => StepType::class, 
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype'    => true,
+                'required'     => false,
+                'attr'         => [
+                    'class' => 'my-selector',
+                ],
             ])
 
             ->add('meals', ChoiceType::class, [

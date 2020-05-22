@@ -1,15 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #F8A055">
-  <a class="navbar-brand">MyRecipes</a>
+  <a class="navbar-brand" href="/">MyRecipes</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/">Page d'accueil <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/recipe">Mes recettes</a>
-      <a class="nav-item nav-link" href="/register">Inscription</a>
-      <a class="nav-item nav-link" href="/logout">Déconnexion</a>
-      <a class="nav-item nav-link" href="/login">Mon compte</a>
-    </div>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-item nav-link" href="/recipe">Mes recettes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-item nav-link" href="/register">Inscription</a>
+      </li>
+
+      {% if not app.user %}
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/login">Connexion</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/logout">Déconnexion</a>
+        </li>
+      {% endif %}
+    </ul>
   </div>
 </nav>
