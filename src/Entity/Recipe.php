@@ -83,7 +83,7 @@ class Recipe
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="recipe", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="recipe", orphanRemoval=true, cascade="all")
      */
     private $step;
 
@@ -92,6 +92,7 @@ class Recipe
         $this->recipeIngredients = new ArrayCollection();
         $this->meals = new ArrayCollection();
         $this->step = new ArrayCollection();
+        $this->dateCreate = new \DateTime;
     }
 
     public function getId(): ?int
@@ -224,6 +225,11 @@ class Recipe
         return $this->meals;
     }
 
+    public function setMeals($meals)
+    {
+        $this->meals = $meals;
+    }
+
     public function addMeal(Meal $meal): self
     {
         if (!$this->meals->contains($meal)) {
@@ -299,8 +305,8 @@ class Recipe
 
     public function addStep(Step $step): self
     {
-        if (!$this->steps->contains($step)) {
-            $this->steps[] = $step;
+        if (!$this->step->contains($step)) {
+            $this->step[] = $step;
             $step->setRecipe($this);
         }
 
@@ -309,8 +315,8 @@ class Recipe
 
     public function removeStep(Step $step): self
     {
-        if ($this->steps->contains($step)) {
-            $this->steps->removeElement($step);
+        if ($this->step->contains($step)) {
+            $this->step->removeElement($step);
             // set the owning side to null (unless already changed)
             if ($step->getRecipe() === $this) {
                 $step->setRecipe(null);

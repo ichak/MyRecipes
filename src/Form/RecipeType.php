@@ -46,21 +46,20 @@ class RecipeType extends AbstractType
                 'allow_delete' => true,
                 'prototype'    => true,
                 'required'     => false,
-                'attr'         => [
-                    'class' => 'my-selector',
-                ],
+                'by_reference' => false,
             ])
 
-            ->add('meals', ChoiceType::class, [
+            /*->add('meals', ChoiceType::class, [
                 'label' => 'recipe.meal',
                 'help' => 'recipe.meal_help',
                 'expanded' => true,
+                'multiple' => true,
                 'choices' => [
                     'recipe.breakfast' => 0,
                     'recipe.lunch' => 1,
                     'recipe.diner' => 2,
                 ],
-            ])
+            ])*/
 
             ->add('save', SubmitType::class, ['label' => 'save'])
         ;
