@@ -115,7 +115,7 @@ class RecipeController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', $translator->trans('recipe.new.success', ['%title%' => $recipe->getName()]));
             
-            return $this->redirectToRoute('recipe_index');
+            return $this->redirectToRoute('app_recipe_index');
         }
 
         return $this->render('recipe/new.html.twig', [
@@ -137,7 +137,7 @@ class RecipeController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', $translator->trans('recipe.edit.success', ['%title%' => $recipe->getName()]));
 
-            return $this->redirectToRoute('recipe_index');
+            return $this->redirectToRoute('app_recipe_index');
         }
 
         return $this->render('recipe/edit.html.twig', [

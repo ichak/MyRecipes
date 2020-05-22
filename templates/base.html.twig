@@ -9,6 +9,7 @@
     <body>
         {% include("partials/navbar.html.twig")%}
         {% block body %}{% endblock %}
+        {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
