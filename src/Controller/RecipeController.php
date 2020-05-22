@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Recipe;
+use App\Form\NewRecipeType;
 use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
+use App\Service\Spoonacular;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -55,8 +57,55 @@ class RecipeController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
-        $recipe = new Recipe();
-        $recipe->setUser($this->getUser());
+        $form = $this->createForm(NewRecipeType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /*$entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($recipe);
+            $entityManager->flush();
+            $this->addFlash('success', $translator->trans('recipe.new.success', ['%title%' => $recipe->getName()]));
+            */
+            $formData = $form->getData();
+            $search = $formData['name']; // Récupére la donnée du champ 'name'
+            return $this->redirectToRoute('recipe_suggest', ['search' => $search]);
+        }
+
+        return $this->render('recipe/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/suggest/{search}", name="recipe_suggest")
+     */
+    public function suggest(string $search, Spoonacular $spoonacular)
+    {
+        $result = $spoonacular->search($search);
+
+        return $this->render('recipe/suggest.html.twig', ['results' => $result['results']]);
+    }
+
+    /**
+     * @Route("/add/{apiId}", name="recipe_add", methods={"GET","POST"}, requirements={"apiId": "\d+"}, defaults={"apiId":0})
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function add(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator, Spoonacular $spoonacular, $apiId): Response
+    {
+        $recipe = (new Recipe)
+            ->setUser($this->getUser())
+        ;
+
+        if ($apiId > 0) { // Choisi une recette dans l'api
+            $apiRecipe = $spoonacular->searchById($apiId);
+            $recipe->setName($apiRecipe['title']);
+            // $recipe->setImage($apiRecipe['image']);
+            $recipe->setTime($apiRecipe['readyInMinutes']);
+            // $recipe->set($apiRecipe['image']);
+            // $recipe->setImage($apiRecipe['image']);
+            // $recipe->setImage($apiRecipe['image']);
+        }
+
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
 
@@ -65,12 +114,11 @@ class RecipeController extends AbstractController
             $entityManager->persist($recipe);
             $entityManager->flush();
             $this->addFlash('success', $translator->trans('recipe.new.success', ['%title%' => $recipe->getName()]));
-
+            
             return $this->redirectToRoute('app_recipe_index');
         }
 
         return $this->render('recipe/new.html.twig', [
-            'recipe' => $recipe,
             'form' => $form->createView(),
         ]);
     }
@@ -89,7 +137,7 @@ class RecipeController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', $translator->trans('recipe.edit.success', ['%title%' => $recipe->getName()]));
 
-            return $this->redirectToRoute('recipe_index');
+            return $this->redirectToRoute('app_recipe_index');
         }
 
         return $this->render('recipe/edit.html.twig', [

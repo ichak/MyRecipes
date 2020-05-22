@@ -6,6 +6,7 @@ use App\Entity\Recipe;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,26 +33,34 @@ class RecipeType extends AbstractType
                 'attr' => ['placeholder' => 'recipe.time'],
             ])
 
-            ->add('ingredients', null, [
+            ->add('recipeIngredients', null, [
                 'label' => 'recipe.ingredients',
                 'attr' => ['placeholder' => 'recipe.ingredients'],
             ])
 
-            ->add('steps', null, [
+            ->add('step', CollectionType::class, [
+
                 'label' => 'recipe.steps',
-                'attr' => ['class' => 'wysiwyg'],
+                'entry_type' => StepType::class, 
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype'    => true,
+                'required'     => false,
+                'by_reference' => false,
             ])
 
-            ->add('meals', ChoiceType::class, [
+            /*->add('meals', ChoiceType::class, [
                 'label' => 'recipe.meal',
                 'help' => 'recipe.meal_help',
                 'expanded' => true,
+                'multiple' => true,
                 'choices' => [
                     'recipe.breakfast' => 0,
                     'recipe.lunch' => 1,
                     'recipe.diner' => 2,
                 ],
-            ])
+            ])*/
 
             ->add('save', SubmitType::class, ['label' => 'save'])
         ;

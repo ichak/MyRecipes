@@ -25,7 +25,7 @@ class Meal
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Recipe::class, mappedBy="meals")
+     * @ORM\ManyToOne(targetEntity=Recipe::class)
      */
     private $recipes;
 
