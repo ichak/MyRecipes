@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suggestion{% endblock %}
+
+{% block body %}
+    <ul>
+    {% for recipe in results %}
+        <li><a href="{{ path('recipe_add', {'apiId': recipe.id}) }}">{{ recipe.title }}</a></li>
+    {% endfor %}
+        <li><a href="{{ path('recipe_add') }}">Nouvelle recette</a></li>
+    </ul>
+{% endblock %}
