@@ -32,12 +32,12 @@ class RecipeType extends AbstractType
                 'attr' => ['placeholder' => 'recipe.time'],
             ])
 
-            ->add('ingredients', null, [
+            ->add('recipeIngredients', null, [
                 'label' => 'recipe.ingredients',
                 'attr' => ['placeholder' => 'recipe.ingredients'],
             ])
 
-            ->add('steps', null, [
+            ->add('step', null, [
                 'label' => 'recipe.steps',
                 'attr' => ['class' => 'wysiwyg'],
             ])

@@ -91,6 +91,7 @@ class Recipe
     {
         $this->recipeIngredients = new ArrayCollection();
         $this->meals = new ArrayCollection();
+        $this->step = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -237,6 +238,18 @@ class Recipe
         if ($this->meals->contains($meal)) {
             $this->meals->removeElement($meal);
         }
+
+        return $this;
+    }
+    
+    /**
+     * Set the value of meals
+     *
+     * @return  self
+     */ 
+    public function setMeals($meals)
+    {
+        $this->meals = $meals;
 
         return $this;
     }
