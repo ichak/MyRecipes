@@ -39,6 +39,7 @@ class RecipeType extends AbstractType
             ])
 
             ->add('step', CollectionType::class, [
+
                 'label' => 'recipe.steps',
                 'entry_type' => StepType::class, 
                 'entry_options' => ['label' => false],
