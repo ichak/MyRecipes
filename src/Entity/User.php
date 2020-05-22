@@ -48,7 +48,6 @@ class User implements UserInterface
 
     public function __construct()
     {
-        // crée un nouvel objet ArrayCollection par défaut pour éviter les erreurs d'appel de méthode sur une valeur nulle
         $this->recipe = new ArrayCollection();
     }
 
