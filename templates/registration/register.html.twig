@@ -3,18 +3,31 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <h1>Inscrivez vous !</h1>
+<div class="page-register"> 
+<div class="row">
+            <div class="col-4">
+                <img src="https://cdn.pixabay.com/photo/2019/10/01/13/58/coffee-4518353_960_720.png" alt="cake" width="305" height="225"></img>
+            </div>
+            <div class="col-8">
+                <div class="card" style="width: 30rem;">
+                <div class="card-title">
+                <h1>Je m'inscrit pour profiter des tous les avantages de MyRecipes</h1>
+                </div>
+                <div class="card-body">
 
-    <div class="container">
-        
-    
-    {{form_start(registrationForm)}}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                    {{form_start(registrationForm)}}
 
-        <button class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword) }}
+                    {{ form_row(registrationForm.username) }}
+                    {{ form_row(registrationForm.agreeTerms) }}
+
+                    <button class="btn">Register</button>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
     </div>
 
+</div>
 {% endblock %}
