@@ -187,6 +187,14 @@ class Recipe
     }
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category")
+     */
+    private $categories;
+
+
+    /**
      * @return Collection|RecipeIngredient[]
      */
     public function getRecipeIngredients(): Collection
@@ -248,18 +256,6 @@ class Recipe
         return $this;
     }
     
-    /**
-     * Set the value of meals
-     *
-     * @return  self
-     */ 
-    public function setMeals($meals)
-    {
-        $this->meals = $meals;
-
-        return $this;
-    }
-
     /**
      * Get the value of image.
      *
