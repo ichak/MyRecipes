@@ -25,13 +25,18 @@ class Meal
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Recipe::class)
+     * @ORM\ManyToMany(targetEntity=Recipe::class, mappedBy="meals")
      */
     private $recipes;
 
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int

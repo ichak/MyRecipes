@@ -30,7 +30,7 @@ class RecipeIngredient
     private $recipe;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $quantity;
 
@@ -63,12 +63,12 @@ class RecipeIngredient
         return $this;
     }
 
-    public function getQuantity(): ?int
+    public function getQuantity(): ?string
     {
         return $this->quantity;
     }
 
-    public function setQuantity(int $quantity): self
+    public function setQuantity(string $quantity): self
     {
         $this->quantity = $quantity;
 
