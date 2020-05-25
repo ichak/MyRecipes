@@ -270,7 +270,7 @@ class Recipe
      */
     public function setImage(?Image $image)
     {
-        if (empty($image->getFile())) {
+        if (empty($image->getFile()) && empty($image->getPath())) {
             $image = null;
         }
         $this->image = $image;
