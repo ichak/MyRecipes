@@ -1,7 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <div class="container">
-<form method="post" action="{{ path('app_recipe_delete', {'id': recipe.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ recipe.id) }}">
-    <button class="btn">Delete</button>
-</form>
+    <h1>Supprimer une recette</h1>
+
+    {{ form_start(form) }}
+    {% embed 'decorators/_card.html.twig' with {"class": "border-danger"} %}
+    {% block body %}
+        <p>Confirmer la suppression de la recette "{{ recipe.name }}".</p>
+    {% endblock %}
+
+    {% block footer %}
+        {{ form_widget(form.delete, {'attr': {'class': 'btn btn-danger'}}) }}
+        <a href="{{ path('app_recipe_index') }}" class="btn btn-secondary">Annuler</a>
+    {% endblock %}
+
+    {% endembed %}
+    {{ form_end(form) }}
 </div>
+
+{% endblock body %}

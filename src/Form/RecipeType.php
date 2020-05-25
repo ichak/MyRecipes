@@ -16,24 +16,24 @@ class RecipeType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'Name',
+                'label' => 'Name :',
                 'attr' => ['placeholder' => 'Name'],
             ])
 
             ->add('image', ImageType::class, ['label' => false])
 
             ->add('deleteImage', CheckboxType::class, [
-                'label' => 'Delete image',
+                'label' => 'Delete image :',
                 'required' => false,
             ])
 
             ->add('time', null, [
-                'label' => 'Prepare time',
+                'label' => 'Prepare time :',
                 'attr' => ['placeholder' => 'Prepare time'],
             ])
 
             ->add('recipeIngredients', CollectionType::class, [
-                'label' => 'Ingredients',
+                'label' => 'Ingredients :',
                 'entry_type' => RecipeIngredientType::class, 
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
@@ -44,7 +44,7 @@ class RecipeType extends AbstractType
             ])
 
             ->add('step', CollectionType::class, [
-                'label' => 'Steps',
+                'label' => 'Steps :',
                 'entry_type' => StepType::class, 
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
@@ -55,7 +55,7 @@ class RecipeType extends AbstractType
             ])
 
             ->add('meals', CollectionType::class, [
-                'label' => 'Meals',
+                'label' => 'Meals :',
                 'entry_type' => MealType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
@@ -65,7 +65,7 @@ class RecipeType extends AbstractType
                 'by_reference' => false,
             ])
 
-            ->add('save', SubmitType::class, ['label' => 'save'])
+            // ->add('save', SubmitType::class, ['label' => 'save'])
         ;
     }
 

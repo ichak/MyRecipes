@@ -3,28 +3,43 @@
 {% block title %}Recipe{% endblock %}
 
 {% block body %}
+<div class="page-show">
+    
+        <div class="row">
+            <div class="col-4">
+                <img src="https://cdn.pixabay.com/photo/2017/08/07/12/42/fork-2603466_960_720.jpg" alt="cake" width="192" height="288"></img>
+            </div>
+            <div class="col-8">
+            <h1>{{ recipe.name }}</h1>
+            </div>
+        </div>
+</div>
+
+<div class="page-show2">
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>{{ recipe.name }}</h1>
                 <p> Modified {{ recipe.dateCreate ? recipe.dateCreate|date('d/m/Y') : '' }} </p>
             </div>
         </div>
         <div class="row">
             <div class="col-4">
-                <p> Preparation time : {{ recipe.time }} min </p>
-                <p>Ingredients :<p>
+                <h2> Preparation time : {{ recipe.time }} min </h2>
+                <div class="card">
+                <h2>Ingredients :</h2>
                 {% for recipeIngredient in recipe.recipeIngredients %}
                     <p>{{ recipeIngredient.quantity }} {{ recipeIngredient.ingredient.unit }} of {{ recipeIngredient.ingredient.name }}</p>
                 {% endfor %}
             </div>
+            </div>
             <div class="col-8">
                 {% for steps in recipe.step %}
-                    <p>Step {{ steps.ordre }} :</p>
+                    <h2>Step {{ steps.ordre }} :</h2>
                     <p>{{ steps }}</p>
                 {% endfor %}
             </div>
         </div>
         <a href="{{ path('app_recipe_index') }}" class="btn-primary">back to list</a>
     </div>
+</div>
 {% endblock %}

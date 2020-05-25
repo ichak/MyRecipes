@@ -24,4 +24,36 @@
         text-align: center;
     }
     
+};
+.page-show{
+    font-family: 'Raleway', sans-serif;
+    .row{
+        background-color: #FCF068;
+        height : 200px;
+        width: 100%;        
+        margin: 0px;
+    }
+    img{
+        margin-top: 40px;
+        margin-left: 80px;
+    }
+    h1{
+        min-width: 500px;
+        margin-top: 10%;
+    }
+padding-bottom: 150px;
+};
+.page-show2{
+    font-family: 'Raleway', sans-serif;
+    .container{
+        margin-top: 10%;
+        text-align: center;
+        color: #FA6E59;
+    }
+    .card{
+        box-shadow: (0px 0px 10px 10px rgba(128, 128, 128, 0.507));
+    }
+};
+h2{
+    color: #FA6E59;
 }
