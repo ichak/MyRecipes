@@ -13,12 +13,12 @@ class NewRecipeType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom de la recette',
-                'attr' => ['placeholder' => 'Quelle recette voulez vous ?'],
+                'label' => 'recipe.name',
+                'attr' => ['placeholder' => 'recipe.name'],
                 'required' => true,
             ])
 
-            ->add('save', SubmitType::class, ['label' => 'Rechercher'])
+            ->add('save', SubmitType::class, ['label' => 'save'])
         ;
     }
 }
