@@ -210,8 +210,7 @@ class RecipeController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', $translator->trans('recipe.new.success', ['%title%' => $recipe->getName()]));
             
-            return $this->redirectToRoute('app_recipe_index');
-        }
+            return $this->redirectToRoute('app_recipe_show', ['id' => $recipe->getId()]);        }
 
         return $this->render('recipe/add.html.twig', [
             'form' => $form->createView(),
