@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Recipe;
 use App\Form\NewRecipeType;
 use App\Form\RecipeType;
+use App\Form\SearchRecipeType;
 use App\Repository\RecipeRepository;
 use App\Service\Spoonacular;
 use Doctrine\ORM\EntityManagerInterface;
