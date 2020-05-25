@@ -1,13 +1,29 @@
 <div class="container">
     {{ form_start(form) }}
         {{ form_row(form.name) }}
-        {{ form_row(form.image) }}
-        {{ form_row(form.deleteImage) }}
-        {{ form_row(form.time) }}
-        {{ form_row(form.recipeIngredients) }}
-        {# Ajout d'un form collection #}
-        {{ form_label(form.step) }}
-        <div>
+        {# {{ form_row(form.image) }} #}
+        {# {{ form_row(form.deleteImage) }} #}
+        {# {{ form_row(form.time) }} #}
+        {# {{ form_row(form.recipeIngredients) }} #}
+        {# <div>
+            <ul id="tag-field-list"
+                data-prototype="{{ form_widget(form.recipeIngredients.vars.prototype)|e }}"
+                data-widget-tags="{{ '<li></li>'|e }}"
+                data-widget-counter="{{ form.recipeIngredients|length }}"
+                class="list-unstyled">
+            {% for recipeIngredient in form.recipeIngredients %}
+                <li class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                    {{ form_errors(recipeIngredients) }}
+                    {{ form_widget(recipeIngredients) }}
+                    </div>
+                    <button type="button" class="btn btn-danger align-self-baseline ml-1" data-delete>⚊</button>
+                </li>
+            {% endfor %}
+            </ul>
+        </div> #}
+        {# {{ form_label(form.step) }} #}
+        {# <div>
             <ul id="tag-field-list"
                 data-prototype="{{ form_widget(form.step.vars.prototype)|e }}"
                 data-widget-tags="{{ '<li></li>'|e }}"
@@ -23,8 +39,25 @@
                 </li>
             {% endfor %}
             </ul>
-        </div>
-        {#{{ form_row(form.meals) }}#}
+        </div> #}
+        {# {{ form_row(form.meals) }} #}
+        {# <div>
+            <ul id="tag-field-list"
+                data-prototype="{{ form_widget(form.meals.vars.prototype)|e }}"
+                data-widget-tags="{{ '<li></li>'|e }}"
+                data-widget-counter="{{ form.meals|length }}"
+                class="list-unstyled">
+            {% for meal in form.meals %}
+                <li class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                    {{ form_errors(meals) }}
+                    {{ form_widget(meals) }}
+                    </div>
+                    <button type="button" class="btn btn-danger align-self-baseline ml-1" data-delete>⚊</button>
+                </li>
+            {% endfor %}
+            </ul>
+        </div> #}
         <button class="btn">{{ button_label|default('Save') }}</button>
     {{ form_end(form) }}
 </div>
