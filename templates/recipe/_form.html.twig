@@ -1,6 +1,5 @@
 <div class="container">
     {{ form_start(form) }}
- 
         {{ form_row(form.name) }}
             <div class="media mb-3">
                 {% if recipe is defined %}
@@ -30,10 +29,9 @@
                 </li>
             {% endfor %}
             </ul>
-
         </div> 
-          {{ form_label(form.step) }} 
-        <div>
+         {{ form_label(form.step) }} 
+         <div>
             <ul id="tag-field-list"
                 data-prototype="{{ form_widget(form.step.vars.prototype)|e }}"
                 data-widget-tags="{{ '<li></li>'|e }}"
