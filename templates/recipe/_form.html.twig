@@ -29,8 +29,8 @@
                 data-widget-tags="{{ '<li></li>'|e }}"
                 data-widget-counter="{{ form.step|length }}"
                 class="list-unstyled">
-            {% for step in form.step %}
-                <li class="d-flex align-items-center">
+            {% for step in form.step %} #}
+                {# <li class="d-flex align-items-center">
                     <div class="flex-grow-1">
                     {{ form_errors(step) }}
                     {{ form_widget(step) }}
