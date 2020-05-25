@@ -10,7 +10,6 @@ use App\Entity\RecipeIngredient;
 use App\Entity\Step;
 use App\Form\NewRecipeType;
 use App\Form\RecipeType;
-use App\Form\SearchRecipeType;
 use App\Repository\IngredientRepository;
 use App\Repository\MealRepository;
 use App\Repository\RecipeRepository;

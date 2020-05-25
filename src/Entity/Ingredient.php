@@ -29,10 +29,6 @@ class Ingredient
      */
     private $unit;
 
-    public function __toString() {
-        return $this->name;
-    }
-
     /**
      * @ORM\OneToMany(targetEntity=RecipeIngredient::class, mappedBy="ingredient")
      */
