@@ -233,11 +233,6 @@ class Recipe
         return $this->meals;
     }
 
-    public function setMeals($meals)
-    {
-        $this->meals = $meals;
-    }
-
     public function addMeal(Meal $meal): self
     {
         if (!$this->meals->contains($meal)) {
