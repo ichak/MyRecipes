@@ -52,7 +52,7 @@ class Recipe
     private $time;
 
     /**
-     * @ORM\OneToMany(targetEntity=RecipeIngredient::class, mappedBy="recipe", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=RecipeIngredient::class, mappedBy="recipe", cascade="all", orphanRemoval=true)
      */
     private $recipeIngredients;
 

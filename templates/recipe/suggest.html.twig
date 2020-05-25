@@ -1,11 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Suggestion{% endblock %}
+{% block title %}Recipe index{% endblock %}
 
 {% block body %}
-
+    <div class="page-recipes">
+    
+        <div class="row">
+            <div class="col-4">
+                <img src="https://cdn.pixabay.com/photo/2016/10/10/01/58/donut-1727498_960_720.png" alt="cake" width="280" height="288"></img>
+            </div>
+            <div class="col-8">
+               <h1>Toutes les recettes trouvées</h1>
+            </div>
+        </div>
+</div>
+<div class="page-recipes2">
+    
     {% for recipe in results %}
-        <div class="row no-gutters bg-light position-relative">
+        <div class=" card row no-gutters bg-light position-relative">
             <div class="col-md-6 position-static p-4 pl-md-0">
                 <h5 class="mt-0">{{ recipe.title }}</h5>
                 <p> Preparation time : {{ recipe.readyInMinutes }} </p>
@@ -14,5 +26,6 @@
             </div>
         </div>
     {% endfor %}
-    
+</div>
+
 {% endblock %}
