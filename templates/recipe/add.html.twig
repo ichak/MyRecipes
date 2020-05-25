@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Create new Recipe</h1>
 
-    {{ form(form) }}
+    {{ include('recipe/_form.html.twig', {'button_label': 'Add'}) }}
 
     <a href="{{ path('app_recipe_index') }}">back to list</a>
 {% endblock %}
