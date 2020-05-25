@@ -1,20 +1,20 @@
 <div class="container">
     {{ form_start(form) }}
         {{ form_row(form.name) }}
-        {{ form_row(form.image) }}
+        {#{{ form_row(form.image) }}
         {{ form_row(form.deleteImage) }}
         {{ form_row(form.time) }}
-        {{ form_row(form.recipeIngredients) }}
+        {{ form_row(form.recipeIngredients) }} #}
         {# Ajout d'un form collection #}
-        {{ form_label(form.step) }}
+        {# {{ form_label(form.step) }}
         <div>
             <ul id="tag-field-list"
                 data-prototype="{{ form_widget(form.step.vars.prototype)|e }}"
                 data-widget-tags="{{ '<li></li>'|e }}"
                 data-widget-counter="{{ form.step|length }}"
                 class="list-unstyled">
-            {% for step in form.step %}
-                <li class="d-flex align-items-center">
+            {% for step in form.step %} #}
+                {# <li class="d-flex align-items-center">
                     <div class="flex-grow-1">
                     {{ form_errors(step) }}
                     {{ form_widget(step) }}
@@ -23,7 +23,7 @@
                 </li>
             {% endfor %}
             </ul>
-        </div>
+        </div> #}
         {#{{ form_row(form.meals) }}#}
         <button class="btn">{{ button_label|default('Save') }}</button>
     {{ form_end(form) }}
