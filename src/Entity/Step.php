@@ -33,6 +33,11 @@ class Step
      */
     private $recipe;
 
+    public function __toString()
+    {
+        return (string) $this->getStep();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

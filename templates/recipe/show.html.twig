@@ -3,32 +3,28 @@
 {% block title %}Recipe{% endblock %}
 
 {% block body %}
-    <h1>Recipe</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ recipe.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ recipe.name }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ recipe.dateCreate ? recipe.dateCreate|date('d/m/Y') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Time</th>
-                <td>{{ recipe.time }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_recipe_index') }}">back to list</a>
-
-    <a href="{{ path('app_recipe_edit', {'id': recipe.id}) }}">edit</a>
-
-    {{ include('recipe/_delete_form.html.twig') }}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>{{ recipe.name }}</h1>
+                <p> Modified {{ recipe.dateCreate ? recipe.dateCreate|date('d/m/Y') : '' }} </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <p> Preparation time : {{ recipe.time }} min </p>
+                <p>Ingredients :<p>
+                {% for recipeIngredient in recipe.recipeIngredients %}
+                    <p>{{ recipeIngredient.quantity }} {{ recipeIngredient.ingredient.unit }} of {{ recipeIngredient.ingredient.name }}</p>
+                {% endfor %}
+            </div>
+            <div class="col-8">
+                {% for steps in recipe.step %}
+                    <p>Step {{ steps.ordre }} :</p>
+                    <p>{{ steps }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <a href="{{ path('app_recipe_index') }}" class="btn-primary">back to list</a>
+    </div>
 {% endblock %}

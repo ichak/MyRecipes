@@ -138,7 +138,7 @@ class RecipeController extends AbstractController
                 $ingredientList[$ingredient['name']] = [
                     'amount' =>$ingredient['amount'],
                     'unit' => $ingredient['unit'],
-                ]; // "olive oil" => "1 tablespoon"
+                ];
             }
             // Requête pour chercher les ingrédients
             $ingredientEntities = $ingredientRepository->findByList($ingredientList);
@@ -181,7 +181,7 @@ class RecipeController extends AbstractController
             $mealEntities = $mealRepository->findByList($mealList);
 
             foreach ($mealEntities as $mealEntity) {
-                // Supprime l'ingrédient déjà en db de la liste
+                // Supprime le meal déjà en db de la liste
                 unset($mealList[array_search($mealEntity->getName(), $mealList)]);
 
                 $recipe->addMeal($mealEntity);
