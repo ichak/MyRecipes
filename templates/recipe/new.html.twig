@@ -3,30 +3,9 @@
 {% block title %}New Recipe{% endblock %}
 
 {% block body %}
-
-   
-    {# <h1>Create new Recipe</h1>
+    <h1>Create new Recipe</h1>
 
     {{ form(form) }}
 
-    <a href="{{ path('app_recipe_index') }}">back to list</a> #}
-
-    <div class="page-newstep"> 
-    <div class="row">
-        <div class="col-4">
-                <img src="https://cdn.pixabay.com/photo/2019/12/13/11/22/chocolate-4692748_960_720.jpg" alt="cake" width="315" height="216"></img>
-        </div>
-            <div class="col-8">
-                <div class="card" style="width: 30rem;">
-                <div class="card-title">
-                <h1>Rechercher une recette</h1>
-                </div>
-                <div class="card-body">
-                {{ include('recipe/_form.html.twig') }}
-                <a href="{{ path('step_index') }}">Retour à la liste des recettes ↩️</a>
-                </div>
-            </div>
-        </div>
-    </div>
- </div   
+    <a href="{{ path('app_recipe_index') }}">back to list</a>
 {% endblock %}
