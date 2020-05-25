@@ -33,13 +33,18 @@ class RecipeType extends AbstractType
                 'attr' => ['placeholder' => 'recipe.time'],
             ])
 
-            ->add('recipeIngredients', null, [
+            ->add('recipeIngredients', CollectionType::class, [
                 'label' => 'recipe.ingredients',
-                'attr' => ['placeholder' => 'recipe.ingredients'],
+                'entry_type' => ingredientType::class, 
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype'    => true,
+                'required'     => false,
+                'by_reference' => false,
             ])
 
             ->add('step', CollectionType::class, [
-
                 'label' => 'recipe.steps',
                 'entry_type' => StepType::class, 
                 'entry_options' => ['label' => false],
@@ -50,17 +55,16 @@ class RecipeType extends AbstractType
                 'by_reference' => false,
             ])
 
-            /*->add('meals', ChoiceType::class, [
-                'label' => 'recipe.meal',
-                'help' => 'recipe.meal_help',
-                'expanded' => true,
-                'multiple' => true,
-                'choices' => [
-                    'recipe.breakfast' => 0,
-                    'recipe.lunch' => 1,
-                    'recipe.diner' => 2,
-                ],
-            ])*/
+            ->add('meals', CollectionType::class, [
+                'label' => 'recipe.meals',
+                'entry_type' => MealType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype'    => true,
+                'required'     => false,
+                'by_reference' => false,
+            ])
 
             ->add('save', SubmitType::class, ['label' => 'save'])
         ;

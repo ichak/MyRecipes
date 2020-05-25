@@ -4,30 +4,32 @@
 
 {% block body %}
 <div class="page-register"> 
-<div class="row">
-            <div class="col-4">
-                <img src="https://cdn.pixabay.com/photo/2019/10/01/13/58/coffee-4518353_960_720.png" alt="cake" width="305" height="225"></img>
-            </div>
-            <div class="col-8">
-                <div class="card" style="width: 30rem;">
+    <div class="row">
+        <div class="col-4">
+            <img src="https://cdn.pixabay.com/photo/2019/10/01/13/58/coffee-4518353_960_720.png" alt="cake" width="305" height="225"></img>
+        </div> <!-- /col-4 -->
+        <div class="col-8">
+            <div class="card" style="width: 30rem;">
                 <div class="card-title">
-                <h1>Je m'inscrit pour profiter des tous les avantages de MyRecipes</h1>
+                    <h1>Je m'inscrit pour profiter des tous les avantages de MyRecipes</h1>
                 </div>
                 <div class="card-body">
 
                     {{form_start(registrationForm)}}
 
                     {{ form_row(registrationForm.email) }}
-                    {{ form_row(registrationForm.plainPassword) }}
                     {{ form_row(registrationForm.username) }}
-                    {{ form_row(registrationForm.agreeTerms) }}
+                    {{ form_row(registrationForm.password) }}
+                    {{ form_row(registrationForm.confirm_password) }}
+                    {{ form_row(registrationForm.conditions) }}
 
-                    <button class="btn">Register</button>
+                    <button class="btn btn-primary">Register</button>
+
                     {{ form_end(registrationForm) }}
-                </div>
-            </div>
-        </div>
-    </div>
 
-</div>
+                </div> <!-- /card-body -->
+            </div> <!-- /card -->
+        </div> <!-- /col-8 -->
+    </div> <!-- /row -->
+</div> <!-- /page-register -->
 {% endblock %}
