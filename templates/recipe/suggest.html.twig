@@ -3,16 +3,10 @@
 {% block title %}Suggestion{% endblock %}
 
 {% block body %}
-
+    <ul>
     {% for recipe in results %}
-        <div class="row no-gutters bg-light position-relative">
-            <div class="col-md-6 position-static p-4 pl-md-0">
-                <h5 class="mt-0">{{ recipe.title }}</h5>
-                <p> Preparation time : {{ recipe.readyInMinutes }} </p>
-                <p> Number of persons : {{ recipe.servings }} </p>
-                <a href="{{ path('recipe_add', {'apiId': recipe.id}) }}" class="stretched-link">Go to the recipe</a>
-            </div>
-        </div>
+        <li><a href="{{ path('recipe_add', {'apiId': recipe.id}) }}">{{ recipe.title }}</a></li>
     {% endfor %}
-    
+        <li><a href="{{ path('recipe_add') }}">Nouvelle recette</a></li>
+    </ul>
 {% endblock %}

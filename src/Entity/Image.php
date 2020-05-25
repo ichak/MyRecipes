@@ -159,9 +159,6 @@ class Image
      */
     public function getWebPath()
     {
-        if (strpos($this->path, 'http') !== false) {
-            return $this->path;
-        } 
         return '/uploads/images/'.$this->path;
     }
 }
