@@ -16,24 +16,24 @@ class RecipeType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'recipe.name',
-                'attr' => ['placeholder' => 'recipe.name'],
+                'label' => 'Name',
+                'attr' => ['placeholder' => 'Name'],
             ])
 
             ->add('image', ImageType::class, ['label' => false])
 
             ->add('deleteImage', CheckboxType::class, [
-                'label' => 'recipe.delete_image',
+                'label' => 'Delete image',
                 'required' => false,
             ])
 
             ->add('time', null, [
-                'label' => 'recipe.time',
-                'attr' => ['placeholder' => 'recipe.time'],
+                'label' => 'Prepare time',
+                'attr' => ['placeholder' => 'Prepare time'],
             ])
 
             ->add('recipeIngredients', CollectionType::class, [
-                'label' => 'recipe.ingredients',
+                'label' => 'Ingredients',
                 'entry_type' => RecipeIngredientType::class, 
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
@@ -44,7 +44,7 @@ class RecipeType extends AbstractType
             ])
 
             ->add('step', CollectionType::class, [
-                'label' => 'recipe.steps',
+                'label' => 'Steps',
                 'entry_type' => StepType::class, 
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
@@ -55,7 +55,7 @@ class RecipeType extends AbstractType
             ])
 
             ->add('meals', CollectionType::class, [
-                'label' => 'recipe.meals',
+                'label' => 'Meals',
                 'entry_type' => MealType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
