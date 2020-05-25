@@ -18,7 +18,7 @@ class RecipeRepository extends ServiceEntityRepository
     /**
      * Recherche des recettes
      */
-    public function findBySearch(string $search, int $page = 1, int $countPerPage = 30): Paginator
+    public function findBySearch($search, int $page = 1, int $countPerPage = 30): Paginator
     {
         $firstResult = ($page - 1) * $countPerPage;
         $query = $this->createQueryBuilder('r')
@@ -26,19 +26,28 @@ class RecipeRepository extends ServiceEntityRepository
             ->leftJoin('r.image', 'img')
             ->leftJoin('r.recipeIngredients', 'ri')
             ->leftJoin('r.meals', 'm')
-            ->leftJoin('r.steps', 's')
+            ->leftJoin('r.step', 's')
             ->leftJoin('r.user', 'u')
-            ->where('r.content LIKE :search')
-            ->setParameter(':search', '%'.trim($search).'%')
-            ->orderBy('s.dateCreate', 'desc')
+            ->where('r.name LIKE :search')
+            ->setParameter(':search', trim($search['recherche']))
+            ->orderBy('r.dateCreate', 'desc')
             ->setFirstResult($firstResult)
             ->setMaxResults($countPerPage)
             ->getQuery()
+            ->getResult()
         ;
 
         return new Paginator($query);
     }
-
+    public function searchRecipe($search)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.name LIKE :search')
+            ->setParameter(':search', trim($search['recherche']))
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
     public function findAll(int $page = 1, int $countPerPage = 30): Paginator
     {

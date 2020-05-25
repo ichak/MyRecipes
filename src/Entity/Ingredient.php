@@ -29,6 +29,10 @@ class Ingredient
      */
     private $unit;
 
+    public function __toString() {
+        return $this->name;
+    }
+
     /**
      * @ORM\OneToMany(targetEntity=RecipeIngredient::class, mappedBy="ingredient")
      */
@@ -37,6 +41,11 @@ class Ingredient
     public function __construct()
     {
         $this->recipeIngredients = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int

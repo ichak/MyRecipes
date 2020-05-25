@@ -2,11 +2,19 @@
     {{ form_start(form) }}
  
         {{ form_row(form.name) }}
-        {# {{ form_row(form.image) }}
-        {{ form_row(form.deleteImage) }}
+            <div class="media mb-3">
+                {% if recipe is defined %}
+                {# asset permet de pointer sur le dossier 'public', twig appelle la méthode 'getWebPath' de l'image #}
+                <img src="{{ recipe.image.webPath }}" class="align-left-center mr-3" style="max-width:180px"/>
+                {% endif %}
+                <div class="media-body">
+                    {{ form_row(form.image) }}
+                    {{ form_row(form.deleteImage) }}
+                </div>
+            </div>
         {{ form_row(form.time) }}
-        {{ form_row(form.recipeIngredients) }}
-        <div>
+        {{ form_label(form.recipeIngredients) }}
+         <div>
             <ul id="tag-field-list"
                 data-prototype="{{ form_widget(form.recipeIngredients.vars.prototype)|e }}"
                 data-widget-tags="{{ '<li></li>'|e }}"
@@ -15,23 +23,24 @@
             {% for recipeIngredient in form.recipeIngredients %}
                 <li class="d-flex align-items-center">
                     <div class="flex-grow-1">
-                    {{ form_errors(recipeIngredients) }}
-                    {{ form_widget(recipeIngredients) }}
+                    {{ form_errors(recipeIngredient) }}
+                    {{ form_widget(recipeIngredient) }}
                     </div>
                     <button type="button" class="btn btn-danger align-self-baseline ml-1" data-delete>⚊</button>
                 </li>
             {% endfor %}
             </ul>
-        </div>
-        {{ form_label(form.step) }}
+
+        </div> 
+          {{ form_label(form.step) }} 
         <div>
             <ul id="tag-field-list"
                 data-prototype="{{ form_widget(form.step.vars.prototype)|e }}"
                 data-widget-tags="{{ '<li></li>'|e }}"
                 data-widget-counter="{{ form.step|length }}"
                 class="list-unstyled">
-            {% for step in form.step %}
-                <li class="d-flex align-items-center">
+            {% for step in form.step %} 
+                 <li class="d-flex align-items-center">
                     <div class="flex-grow-1">
                     {{ form_errors(step) }}
                     {{ form_widget(step) }}
@@ -40,9 +49,9 @@
                 </li>
             {% endfor %}
             </ul>
-        </div>
-        {{ form_row(form.meals) }}
-        <div>
+        </div> 
+         {{ form_label(form.meals) }} 
+         <div>
             <ul id="tag-field-list"
                 data-prototype="{{ form_widget(form.meals.vars.prototype)|e }}"
                 data-widget-tags="{{ '<li></li>'|e }}"
@@ -51,14 +60,14 @@
             {% for meal in form.meals %}
                 <li class="d-flex align-items-center">
                     <div class="flex-grow-1">
-                    {{ form_errors(meals) }}
-                    {{ form_widget(meals) }}
+                    {{ form_errors(meal) }}
+                    {{ form_widget(meal) }}
                     </div>
                     <button type="button" class="btn btn-danger align-self-baseline ml-1" data-delete>⚊</button>
                 </li>
             {% endfor %}
             </ul>
-        </div> #}
-        
+        </div>
+        <button class="btn">{{ button_label|default('Save') }}</button>
     {{ form_end(form) }}
 </div>
