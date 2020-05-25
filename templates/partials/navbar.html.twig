@@ -5,9 +5,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-item nav-link" href="/recipe">Mes recettes</a>
-      </li>
+      
       <li class="nav-item">
         <a class="nav-item nav-link" href="/register">Inscription</a>
       </li>
@@ -19,6 +17,9 @@
       {% else %}
         <li class="nav-item">
           <a class="nav-item nav-link" href="/logout">Déconnexion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/recipe/index">Mes recettes</a>
         </li>
       {% endif %}
     </ul>
