@@ -2,9 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
+use App\Entity\Ingredient;
+use App\Entity\Meal;
 use App\Entity\Recipe;
+use App\Entity\RecipeIngredient;
+use App\Entity\Step;
 use App\Form\NewRecipeType;
 use App\Form\RecipeType;
+use App\Repository\IngredientRepository;
+use App\Repository\MealRepository;
 use App\Repository\RecipeRepository;
 use App\Service\Spoonacular;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,7 +79,7 @@ class RecipeController extends AbstractController
         }
 
         return $this->render('recipe/new.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
@@ -90,7 +97,15 @@ class RecipeController extends AbstractController
      * @Route("/add/{apiId}", name="recipe_add", methods={"GET","POST"}, requirements={"apiId": "\d+"}, defaults={"apiId":0})
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function add(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator, Spoonacular $spoonacular, $apiId): Response
+    public function add(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        TranslatorInterface $translator,
+        Spoonacular $spoonacular,
+        $apiId,
+        IngredientRepository $ingredientRepository,
+        MealRepository $mealRepository
+    ): Response
     {
         $recipe = (new Recipe)
             ->setUser($this->getUser())
@@ -99,11 +114,91 @@ class RecipeController extends AbstractController
         if ($apiId > 0) { // Choisi une recette dans l'api
             $apiRecipe = $spoonacular->searchById($apiId);
             $recipe->setName($apiRecipe['title']);
-            // $recipe->setImage($apiRecipe['image']);
+            $image = (new Image)
+                ->setPath($apiRecipe['image'])
+            ;
+            $recipe->setImage($image);
             $recipe->setTime($apiRecipe['readyInMinutes']);
-            // $recipe->set($apiRecipe['image']);
-            // $recipe->setImage($apiRecipe['image']);
-            // $recipe->setImage($apiRecipe['image']);
+
+            // Steps
+            $steps = $apiRecipe['analyzedInstructions'][0]['steps'];
+            foreach ($steps as $key => $step) {
+                $stepEntity = (new Step)
+                    ->setStep($step['step'])
+                    ->setOrdre($key +1)
+                ;
+
+                $recipe->addStep($stepEntity);
+            }
+
+            // Ingredients
+            $ingredients = $apiRecipe['extendedIngredients'];
+            $ingredientList = [];
+            foreach ($ingredients as $ingredient) {
+                $ingredientList[$ingredient['name']] = [
+                    'amount' =>$ingredient['amount'],
+                    'unit' => $ingredient['unit'],
+                ]; // "olive oil" => "1 tablespoon"
+            }
+            // Requête pour chercher les ingrédients
+            $ingredientEntities = $ingredientRepository->findByList($ingredientList);
+
+            foreach ($ingredientEntities as $ingredientEntity) {
+                $recipeIngredient = (new RecipeIngredient)
+                    ->setIngredient($ingredientEntity)
+                    ->setQuantity($ingredientList[$ingredientEntity->getName()]['amount'])
+                ;
+
+                // Supprime l'ingrédient déjà en db de la liste
+                unset($ingredientList[$ingredientEntity->getName()]);
+
+                $recipe->addRecipeIngredient($recipeIngredient);
+            }
+
+            foreach ($ingredientList as $name => $ingredient) {
+                $ingredientEntity = (new Ingredient)
+                    ->setName($name)
+                    ->setUnit($ingredient['unit'])
+                ;
+
+                $entityManager->persist($ingredientEntity);
+                
+                $recipeIngredient = (new RecipeIngredient)
+                    ->setIngredient($ingredientEntity)
+                    ->setQuantity($ingredientList[$name]['amount'])
+                ;
+
+                $recipe->addRecipeIngredient($recipeIngredient);
+            }
+
+            // Meals
+            $meals = $apiRecipe['dishTypes'];
+            $mealList = [];
+            foreach ($meals as $meal) {
+                $mealList[] = $meal;
+            }
+            // Requête pour chercher les meals
+            $mealEntities = $mealRepository->findByList($mealList);
+
+            foreach ($mealEntities as $mealEntity) {
+                // Supprime l'ingrédient déjà en db de la liste
+                unset($mealList[array_search($mealEntity->getName(), $mealList)]);
+
+                $recipe->addMeal($mealEntity);
+            }
+
+            foreach ($mealList as $mealName) {
+            $mealEntity = (new Meal)
+                ->setName($mealName)
+            ;
+
+            $entityManager->persist($mealEntity);
+
+            $recipe->addMeal($mealEntity);
+            }
+
+            $entityManager->flush();
+
         }
 
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -118,8 +213,9 @@ class RecipeController extends AbstractController
             return $this->redirectToRoute('app_recipe_index');
         }
 
-        return $this->render('recipe/new.html.twig', [
+        return $this->render('recipe/add.html.twig', [
             'form' => $form->createView(),
+            'recipe' => $recipe,
         ]);
     }
 
