@@ -47,4 +47,17 @@ class IngredientRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * Retourne les meals d'une liste
+     */
+    public function findByList($list)
+    {
+        $query = $this->createQueryBuilder('i')
+            ->where('i.name IN (:list)')
+            ->setParameter(':list', array_keys($list))
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }
