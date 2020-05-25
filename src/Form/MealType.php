@@ -12,9 +12,8 @@ class MealType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, [
-                'label' => false
-            ])
+            ->add('name')
+            ->add('recipes')
         ;
     }
 
