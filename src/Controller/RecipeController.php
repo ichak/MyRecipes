@@ -50,7 +50,6 @@ class RecipeController extends AbstractController
 
     /**
      * @Route("/{id}", requirements = {"id": "\d+"})
-     * @Security("is_granted('ROLE_USER')")
      */
     public function show(Recipe $recipe)
     {
@@ -60,7 +59,6 @@ class RecipeController extends AbstractController
 
     /**
      * @Route("/new", name="recipe_new", methods={"GET","POST"})
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function new(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
@@ -95,7 +93,6 @@ class RecipeController extends AbstractController
 
     /**
      * @Route("/add/{apiId}", name="recipe_add", methods={"GET","POST"}, requirements={"apiId": "\d+"}, defaults={"apiId":0})
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function add(
         Request $request,
@@ -220,7 +217,6 @@ class RecipeController extends AbstractController
 
     /**
      * @Route("/{id}/edit", requirements = {"id": "\d+"})
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator, Recipe $recipe): Response
     {
@@ -243,7 +239,6 @@ class RecipeController extends AbstractController
 
     /**
      * @Route("/{id}/delete", requirements = {"id": "\d+"})
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Request $request, EntityManagerInterface $entityManager, Recipe $recipe): Response
     {
