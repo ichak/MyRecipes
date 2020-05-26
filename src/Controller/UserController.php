@@ -18,7 +18,6 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/", name="user_index", methods={"GET"})
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -29,7 +28,6 @@ class UserController extends AbstractController
 
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function new(Request $request): Response
     {
@@ -63,7 +61,6 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, User $user): Response
     {
@@ -84,7 +81,6 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="user_delete", methods={"DELETE"})
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Request $request, User $user): Response
     {
